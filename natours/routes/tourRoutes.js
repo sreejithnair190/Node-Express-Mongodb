@@ -8,7 +8,7 @@ const router = express.Router();
 router
   .route('/')
   .get(tourController.get_tours)
-  .post(tourController.validate ,tourController.create_tour);
+  .post(tourController.create_tour);
 
 router
   .route('/:id') 
