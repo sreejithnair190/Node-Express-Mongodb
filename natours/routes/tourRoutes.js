@@ -10,6 +10,14 @@ router
   .get(tourController.aliasTopTours, tourController.get_tours)
 
 router
+  .route('/tour-stats')
+  .get(tourController.get_tour_stats)
+
+router
+  .route('/monthly-plan/:year')
+  .get(tourController.get_monthly_plan)
+
+router
   .route('/')
   .get(tourController.get_tours)
   .post(tourController.create_tour);
