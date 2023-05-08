@@ -2,25 +2,10 @@ const express = require('express');
 const morgan = require('morgan');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
+const AppError = require('./utils/appError');
+const errorHandler = require('./controllers/errorController');
 
 const app = express();
-
-const notFound = (req, res, next) => {
-  const err = new Error(`Can't find ${req.originalUrl} not found`);
-  err.status = 'fail';
-  err.statusCode = 404;
-  next(err);
-};
-
-const errHandler = (err, req, res, next) => {
-  const statusCode = err.statusCode || 500;
-  const status = err.status || 'Something went wrong';
-
-  res.status(statusCode).json({
-    status,
-    message: err.message,
-  });
-};
 
 // Middlewares
 if (process.env.NODE_ENV == 'development') {
@@ -42,8 +27,8 @@ app.use((req, res, next) => {
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 
-app.all('*', notFound);
+app.all('*', (req, res, next) => next(new AppError(`Can't find ${req.originalUrl} not found`, 404)));
 
-app.use(errHandler);
+app.use(errorHandler);
 
 module.exports = app;
