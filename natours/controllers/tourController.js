@@ -1,6 +1,12 @@
 const Tour = require('./../models/tourModel');
 const ApiFeatures = require('./../utils/apiFeatures');
 
+const catchAsyncErr = fn => {
+  return (req, res, next) => {
+    fn(req, res, next).catch(next);
+  }
+}
+
 exports.aliasTopTours = (req, res, next) => {
   try {
     req.query.limit = '5';
@@ -55,9 +61,8 @@ exports.get_tour = async (req, res) => {
   }
 };
 
-exports.create_tour = async (req, res) => {
-  try {
-    const newTour = await Tour.create(req.body);
+exports.create_tour = catchAsyncErr(async (req, res) => {
+  const newTour = await Tour.create(req.body);
 
     res.status(201).json({
       status: 'success',
@@ -65,13 +70,7 @@ exports.create_tour = async (req, res) => {
         tour: newTour,
       },
     });
-  } catch (error) {
-    res.status(400).json({
-      status: 'error',
-      message: error,
-    });
-  }
-};
+});
 
 exports.update_tour = async (req, res) => {
   try {
