@@ -1,0 +1,112 @@
+[13-05-2023 09:37:08] - Error: Internal server error
+    at G:\mern\node\practice\natours\app.js:32:8
+    at Layer.handle_error (G:\mern\node\practice\natours\node_modules\express\lib\router\layer.js:71:5)
+    at trim_prefix (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:326:13)
+    at G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:346:12)
+    at Immediate.next (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:280:10)
+    at Immediate._onImmediate (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:646:15)
+    at process.processImmediate (node:internal/timers:477:21)
+[14-05-2023 22:08:17] - Error: Internal server error
+    at G:\mern\node\practice\natours\app.js:32:8
+    at Layer.handle_error (G:\mern\node\practice\natours\node_modules\express\lib\router\layer.js:71:5)
+    at trim_prefix (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:326:13)
+    at G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:346:12)
+    at Immediate.next (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:280:10)
+    at Immediate._onImmediate (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:646:15)
+    at process.processImmediate (node:internal/timers:477:21)
+[14-05-2023 22:09:26] - Error: Internal server error
+    at G:\mern\node\practice\natours\app.js:32:8
+    at Layer.handle_error (G:\mern\node\practice\natours\node_modules\express\lib\router\layer.js:71:5)
+    at trim_prefix (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:326:13)
+    at G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:346:12)
+    at Immediate.next (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:280:10)
+    at Immediate._onImmediate (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:646:15)
+    at process.processImmediate (node:internal/timers:477:21)
+[14-05-2023 22:10:03] - Error: Internal server error
+    at G:\mern\node\practice\natours\app.js:32:8
+    at Layer.handle_error (G:\mern\node\practice\natours\node_modules\express\lib\router\layer.js:71:5)
+    at trim_prefix (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:326:13)
+    at G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:346:12)
+    at Immediate.next (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:280:10)
+    at Immediate._onImmediate (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:646:15)
+    at process.processImmediate (node:internal/timers:477:21)
+[14-05-2023 22:25:56] - Error: Internal server error
+    at G:\mern\node\practice\natours\app.js:34:8
+    at Layer.handle_error (G:\mern\node\practice\natours\node_modules\express\lib\router\layer.js:71:5)
+    at trim_prefix (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:326:13)
+    at G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:346:12)
+    at Immediate.next (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:280:10)
+    at Immediate._onImmediate (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:646:15)
+    at process.processImmediate (node:internal/timers:477:21)
+[14-05-2023 22:26:34] - Error: Internal server error
+    at G:\mern\node\practice\natours\app.js:35:8
+    at Layer.handle_error (G:\mern\node\practice\natours\node_modules\express\lib\router\layer.js:71:5)
+    at trim_prefix (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:326:13)
+    at G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:346:12)
+    at Immediate.next (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:280:10)
+    at Immediate._onImmediate (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:646:15)
+    at process.processImmediate (node:internal/timers:477:21)
+[14-05-2023 22:26:45] - Error: Internal server error
+    at G:\mern\node\practice\natours\app.js:35:8
+    at Layer.handle_error (G:\mern\node\practice\natours\node_modules\express\lib\router\layer.js:71:5)
+    at trim_prefix (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:326:13)
+    at G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:346:12)
+    at Immediate.next (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:280:10)
+    at Immediate._onImmediate (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:646:15)
+    at process.processImmediate (node:internal/timers:477:21)
+[14-05-2023 22:27:46] - Error: Internal server error
+    at G:\mern\node\practice\natours\app.js:35:8
+    at Layer.handle_error (G:\mern\node\practice\natours\node_modules\express\lib\router\layer.js:71:5)
+    at trim_prefix (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:326:13)
+    at G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:346:12)
+    at Immediate.next (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:280:10)
+    at Immediate._onImmediate (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:646:15)
+    at process.processImmediate (node:internal/timers:477:21)
+[14-05-2023 22:28:23] - Error: Internal server error
+    at G:\mern\node\practice\natours\app.js:35:8
+    at Layer.handle_error (G:\mern\node\practice\natours\node_modules\express\lib\router\layer.js:71:5)
+    at trim_prefix (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:326:13)
+    at G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:346:12)
+    at Immediate.next (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:280:10)
+    at Immediate._onImmediate (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:646:15)
+    at process.processImmediate (node:internal/timers:477:21)
+[14-05-2023 22:30:29] - Error: Internal server error
+    at G:\mern\node\practice\natours\app.js:35:8
+    at Layer.handle_error (G:\mern\node\practice\natours\node_modules\express\lib\router\layer.js:71:5)
+    at trim_prefix (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:326:13)
+    at G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:346:12)
+    at Immediate.next (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:280:10)
+    at Immediate._onImmediate (G:\mern\node\practice\natours\node_modules\express\lib\router\index.js:646:15)
+    at process.processImmediate (node:internal/timers:477:21)
+[14-05-2023 22:54:27] - CastError: Cast to ObjectId failed for value "6424fdaea911e44a90503681a" (type string) at path "_id" for model "Tour"
+    at ObjectId.cast (G:\mern\node\practice\natours\node_modules\mongoose\lib\schema\objectid.js:248:11)
+    at SchemaType.applySetters (G:\mern\node\practice\natours\node_modules\mongoose\lib\schematype.js:1202:12)
+    at SchemaType.castForQuery (G:\mern\node\practice\natours\node_modules\mongoose\lib\schematype.js:1613:15)
+    at cast (G:\mern\node\practice\natours\node_modules\mongoose\lib\cast.js:348:32)
+    at Query.cast (G:\mern\node\practice\natours\node_modules\mongoose\lib\query.js:4791:12)
+    at Query._castConditions (G:\mern\node\practice\natours\node_modules\mongoose\lib\query.js:2177:10)
+    at model.Query._findOne (G:\mern\node\practice\natours\node_modules\mongoose\lib\query.js:2465:8)
+    at model.Query.exec (G:\mern\node\practice\natours\node_modules\mongoose\lib\query.js:4321:28)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async G:\mern\node\practice\natours\controllers\tourController.js:30:16
+[14-05-2023 22:55:10] - CastError: Cast to ObjectId failed for value "6424fdaea911e44a90503681a" (type string) at path "_id" for model "Tour"
+    at ObjectId.cast (G:\mern\node\practice\natours\node_modules\mongoose\lib\schema\objectid.js:248:11)
+    at SchemaType.applySetters (G:\mern\node\practice\natours\node_modules\mongoose\lib\schematype.js:1202:12)
+    at SchemaType.castForQuery (G:\mern\node\practice\natours\node_modules\mongoose\lib\schematype.js:1613:15)
+    at cast (G:\mern\node\practice\natours\node_modules\mongoose\lib\cast.js:348:32)
+    at Query.cast (G:\mern\node\practice\natours\node_modules\mongoose\lib\query.js:4791:12)
+    at Query._castConditions (G:\mern\node\practice\natours\node_modules\mongoose\lib\query.js:2177:10)
+    at model.Query._findOne (G:\mern\node\practice\natours\node_modules\mongoose\lib\query.js:2465:8)
+    at model.Query.exec (G:\mern\node\practice\natours\node_modules\mongoose\lib\query.js:4321:28)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async G:\mern\node\practice\natours\controllers\tourController.js:30:16
