@@ -1,7 +1,6 @@
 const Tour = require('./../models/tourModel');
 const ApiFeatures = require('./../utils/apiFeatures');
 const AppError = require('./../utils/appError');
-
 const catchAsyncErr = require('./../utils/catchAsyncErr');
 
 exports.aliasTopTours = (req, res, next) => {
@@ -28,18 +27,6 @@ exports.get_tours = catchAsyncErr(async (req, res, next) => {
 exports.get_tour = catchAsyncErr(async (req, res, next) => {
   const id = req.params.id;
   const tour = await Tour.findById(id);
-  
-  // Working
-  // try {
-  //   await Tour.findById(id);
-  // } catch (error) {
-  //   return next( new AppError('No Tour Found', 404) );
-  // }
-
-  if (!tour) {
-    return next( new AppError('No Tour Found', 404) );
-
-  }
 
   res.status(200).json({
     status: 'success',

@@ -2,52 +2,64 @@ const fs = require('fs');
 const moment = require('moment-timezone');
 const AppError = require('../utils/appError');
 
+
+const handleCastError = err => {
+  const message = `Invalid ${err.path}: ${err.value}`;
+  return new AppError(message, 400)
+}
+
+const handleDuplicateFieldsDB = err => {
+  const message = `Duplicate value: ${err.keyValue.name}. Please use another value`;
+  return new AppError(message, 400)
+}
+
+const handleValidationError = err => {
+
+  const errors = Object.values(err.errors).map( el => el.message );
+
+  const message = `Invalid Input data. ${ errors.join('. ') }`;
+  return new AppError(message, 400)
+}
+
 const errDev = (err, res) => {
   const statusCode = err.statusCode || 500;
   res.status(statusCode).json({
-    statusCode: statusCode,
-    // error: err,
-    // status: statusCode,
-    // message: err.message,
-    // stack: err.stack
+    status: err.status,
+    error: err,
+    message: err.message,
   });
 }
 
 const errProd = (err, res) => {
-  let status = 500;
-  let message = "Something went wrong"; 
   if (err.isOperational) {
-   status = err.status
-   message = err.message;
+    res.status(500).json({
+      status: err.status,
+      message: err.message,
+    });
   }else{
-    console.log(err);
+    res.status(500).json({
+      status:'error',
+      message: "Something went wrong",
+    });
   }
-  res.status(statusCode).json({
-    status,
-    message: message,
-  });
 }
 
 module.exports = (err, req, res, next) => {
-  // console.log(err);
-  const statusCode = err.statusCode || 500;
-  const status = err.status || 'error';
-
-  res.status(statusCode).json({
-    status,
-    message:err.message
-  })
-
   // const date = moment.tz('Asia/Kolkata').format('DD-MM-YYYY HH:mm:ss');
   // const data = `[${date}] - ${err.stack}\n`;
   // fs.appendFile(`${__dirname}/../storage/error.log`, data, 'utf-8', (error) => {if(error) {console.log(error)}} )
 
-  // const statusCode = err.statusCode || 500;
-  // const status = err.status || 'Error';
+  if (process.env.NODE_ENV == 'development') {
 
-  // if (process.env.NODE_ENV == 'development') {
-  //   errDev(err, res);
-  // }else if(process.env.NODE_ENV == 'production'){
-  //   errProd(err, res);
-  // }
+    let error = Object.assign(err);
+    
+    if(error.name == 'CastError') error = handleCastError(error)
+    if(error.code == 11000) error = handleDuplicateFieldsDB(error)
+    if(error.name == 'ValidationError') error = handleValidationError(error)
+
+    errDev(error, res);
+
+  }else if(process.env.NODE_ENV == 'production'){
+    errProd(err, res);
+  }
 };
