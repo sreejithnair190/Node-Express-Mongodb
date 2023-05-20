@@ -3,6 +3,16 @@ const moment = require('moment-timezone');
 const AppError = require('../utils/appError');
 
 
+const handleJWTError = err => {
+  const message = ``;
+  return new AppError(message, 400)
+}
+
+const handleTokenExpiredError = err => {
+  const message = ``;
+  return new AppError(message, 400)
+}
+
 const handleCastError = err => {
   const message = `Invalid ${err.path}: ${err.value}`;
   return new AppError(message, 400)
@@ -14,9 +24,7 @@ const handleDuplicateFieldsDB = err => {
 }
 
 const handleValidationError = err => {
-
   const errors = Object.values(err.errors).map( el => el.message );
-
   const message = `Invalid Input data. ${ errors.join('. ') }`;
   return new AppError(message, 400)
 }
@@ -56,6 +64,8 @@ module.exports = (err, req, res, next) => {
     if(error.name == 'CastError') error = handleCastError(error)
     if(error.code == 11000) error = handleDuplicateFieldsDB(error)
     if(error.name == 'ValidationError') error = handleValidationError(error)
+    if(error.name == 'JsonWebTokenError') error = handleJWTError(error)
+    if(error.name == 'TokenExpiredError') error = handleTokenExpiredError(error)
 
     errDev(error, res);
 
