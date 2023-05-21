@@ -3,15 +3,9 @@ const moment = require('moment-timezone');
 const AppError = require('../utils/appError');
 
 
-const handleJWTError = err => {
-  const message = ``;
-  return new AppError(message, 400)
-}
+const handleJWTError = err => new AppError('Invalid Token! Please login again', 401)
 
-const handleTokenExpiredError = err => {
-  const message = ``;
-  return new AppError(message, 400)
-}
+const handleTokenExpiredError = err => new AppError('Session expired. Please login again!')
 
 const handleCastError = err => {
   const message = `Invalid ${err.path}: ${err.value}`;

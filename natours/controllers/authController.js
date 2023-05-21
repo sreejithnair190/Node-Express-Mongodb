@@ -61,5 +61,18 @@ exports.protect = catchAsyncErr(async (req, res, next) => {
 
     // Verify token
     const decoded = jwt.decode(token);
+
+    // Verify if user exist
+    const user = await User.findById(decoded.id);
+    if(!user){
+        return next(new AppError('Account doesn\'t exist'), 401)
+    }
+
+    // Verify if password changed after login
+    if (user.changedPasswordAfter(decoded.iat)) {
+        return next(new AppError('Something went wrong. Please login again', 401))
+    }
+
+
     next();
 });
