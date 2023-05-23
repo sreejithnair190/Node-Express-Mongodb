@@ -28,8 +28,10 @@ exports.sign_up = catchAsyncErr( async (req, res, next) => {
     const user = await User.create({
         name: req.body.name,
         email: req.body.email,
+        photo: req.body.photo,
         password: req.body.password,
-        confirm_password: req.body.confirm_password
+        confirm_password: req.body.confirm_password,
+        passwordChangedAt: req.body.passwordChangedAt
     });
 
     const payload = { id: user._id }
@@ -69,10 +71,11 @@ exports.protect = catchAsyncErr(async (req, res, next) => {
     }
 
     // Verify if password changed after login
-    if (user.changedPasswordAfter(decoded.iat)) {
-        return next(new AppError('Something went wrong. Please login again', 401))
+    if (await user.changedPasswordAfter(decoded.iat)) {
+        return next(new AppError('Password Changed. Please login again', 401))
     }
 
+    req.user = user;
 
     next();
 });
