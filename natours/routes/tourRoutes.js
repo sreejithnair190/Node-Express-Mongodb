@@ -4,29 +4,30 @@ const authController = require('./../controllers/authController');
 
 const router = express.Router();
 
-// router.param('id', tourController.checkId)
+const restrictUserMiddleware = authController.restrict_user_to(
+  'admin',
+  'lead-user'
+);
 
 router
   .route('/top-5-cheap')
-  .get(tourController.aliasTopTours, tourController.get_tours)
+  .get(tourController.aliasTopTours, tourController.get_tours);
 
-router
-  .route('/tour-stats')
-  .get(tourController.get_tour_stats)
+router.route('/tour-stats').get(tourController.get_tour_stats);
 
-router
-  .route('/monthly-plan/:year')
-  .get(tourController.get_monthly_plan)
+router.route('/monthly-plan/:year').get(tourController.get_monthly_plan);
 
 router
   .route('/')
-  .get(authController.protect, tourController.get_tours)
+  .all(authController.protect)
+  .get(tourController.get_tours)
   .post(tourController.create_tour);
 
 router
-  .route('/:id') 
+  .route('/:id')
+  .all(authController.protect)
   .get(tourController.get_tour)
-  .patch(tourController.update_tour)
-  .delete(tourController.delete_tour);
+  .patch(restrictUserMiddleware, tourController.update_tour)
+  .delete(restrictUserMiddleware, tourController.delete_tour);
 
 module.exports = router;
