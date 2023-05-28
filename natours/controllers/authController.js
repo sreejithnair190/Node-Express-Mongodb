@@ -63,7 +63,7 @@ exports.protect = catchAsyncErr(async (req, res, next) => {
   }
 
   // Verify token
-  const decoded = jwt.decode(token);
+  const decoded = await jwt.decode(token);
 
   // Verify if user exist
   const user = await User.findById(decoded.id);
@@ -151,11 +151,33 @@ exports.reset_password = catchAsyncErr(async (req, res, next) => {
   user.resetPasswordTokenExpiry = undefined;
   await user.save();
 
-  const token = jwt.generateAuthToken({id : user._id});
+  const token = jwt.generateAuthToken({ id: user._id });
 
   res.status(200).json({
-    status:'success',
-    token
+    status: 'success',
+    token,
   });
+});
 
+exports.update_password = catchAsyncErr(async (req, res, next) => {
+  const user = await User.findById(req.user.id).select('+password');
+
+  const current_password = req.body.current_password;
+  if (!current_password) {
+    return next(new AppError('Please enter current passwor', 400));
+  }
+
+  if (!(await user.comparePassword(current_password, user.password))) {
+    return next(new AppError('Your current password is invalid', 401));
+  }
+
+  user.password = req.body.password;
+  user.confirm_password = req.body.confirm_password;
+  await user.save();
+
+  const token = jwt.generateAuthToken({ id: user._id });
+  res.status(200).json({
+    status: 'success',
+    token,
+  });
 });
