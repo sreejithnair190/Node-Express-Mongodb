@@ -40,7 +40,14 @@ const userSchema = mongoose.Schema({
   },
   passwordChangedAt: Date,
   resetPasswordToken: String,
-  resetPassordTokenExpiry: Date,
+  resetPasswordTokenExpiry: Date
+});
+
+userSchema.pre('save', async function (next){
+  if (!this.isModified('password') || this.isNew) return next();
+
+  this.passwordChangedAt = Date.now() - 1000;
+  next();
 });
 
 userSchema.pre('save', async function (next) {
@@ -70,14 +77,16 @@ userSchema.methods.changedPasswordAfter = async function (jwt_timestamp) {
   return isChanged;
 };
 
-userSchema.methods.resetPasswordToken = function () {
+userSchema.methods.createResetPasswordToken = function () {
   const resetToken = crypto.randomBytes(32).toString('hex');
 
   this.resetPasswordToken = crypto
     .createHash('sha256')
     .update(resetToken)
     .digest('hex');
-  this.resetPasswordTokenExpiry = Date.now() * 10 * 60 * 1000;
+  this.resetPasswordTokenExpiry = Date.now() + 10 * 60 * 1000;
+
+  // console.log({resetToken}, this.resetPasswordToken, this.resetPasswordTokenExpiry);
 
   return resetToken;
 };
