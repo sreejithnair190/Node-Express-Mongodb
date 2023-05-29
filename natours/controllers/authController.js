@@ -5,6 +5,29 @@ const catchAsyncErr = require('./../utils/catchAsyncErr');
 const AppError = require('./../utils/appError');
 const sendEmail = require('./../utils/email');
 
+const sendToken = (user, res) => {
+  const token = jwt.generateAuthToken({ id: user._id });
+  
+  const cookieOptions = {
+    expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 60 * 1000),
+    httpOnly: true
+  };
+  if(process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+
+  res.cookie('jwt', token, cookieOptions)
+  user.password = undefined;
+  user.__v = undefined;
+
+  res.status(200).json({
+    status: 'success',
+    token,
+    data:{
+      user
+    }
+  });
+}
+
+
 exports.login = catchAsyncErr(async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -18,12 +41,7 @@ exports.login = catchAsyncErr(async (req, res, next) => {
     return next(new AppError('Invalid credentials', 401));
   }
 
-  const token = jwt.generateAuthToken({ id: user._id });
-
-  res.status(200).json({
-    status: 'success',
-    token,
-  });
+  sendToken(user, res);
 });
 
 exports.sign_up = catchAsyncErr(async (req, res, next) => {
@@ -37,16 +55,7 @@ exports.sign_up = catchAsyncErr(async (req, res, next) => {
     role: req.body.role,
   });
 
-  const payload = { id: user._id };
-  const token = jwt.generateAuthToken(payload);
-
-  res.status(201).json({
-    status: 'success',
-    token,
-    data: {
-      user,
-    },
-  });
+  sendToken(user, res);
 });
 
 exports.protect = catchAsyncErr(async (req, res, next) => {
@@ -151,12 +160,7 @@ exports.reset_password = catchAsyncErr(async (req, res, next) => {
   user.resetPasswordTokenExpiry = undefined;
   await user.save();
 
-  const token = jwt.generateAuthToken({ id: user._id });
-
-  res.status(200).json({
-    status: 'success',
-    token,
-  });
+  sendToken(user, res);
 });
 
 exports.update_password = catchAsyncErr(async (req, res, next) => {
@@ -175,9 +179,5 @@ exports.update_password = catchAsyncErr(async (req, res, next) => {
   user.confirm_password = req.body.confirm_password;
   await user.save();
 
-  const token = jwt.generateAuthToken({ id: user._id });
-  res.status(200).json({
-    status: 'success',
-    token,
-  });
+  sendToken(user, res);
 });
