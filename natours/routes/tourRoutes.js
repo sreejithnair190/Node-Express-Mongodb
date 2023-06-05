@@ -1,6 +1,7 @@
 const express = require('express');
 const tourController = require('./../controllers/tourController');
 const authController = require('./../controllers/authController');
+const reviewRouter = require('./../routes/reviewRoutes');
 
 const router = express.Router();
 
@@ -8,6 +9,8 @@ const restrictUserMiddleware = authController.restrict_user_to(
   'admin',
   'lead-user'
 );
+
+router.use('/:tour_id/reviews', reviewRouter);
 
 router
   .route('/top-5-cheap')
