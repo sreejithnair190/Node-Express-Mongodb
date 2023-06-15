@@ -3,7 +3,7 @@ const User = require('./../models/userModel');
 const Tour = require('./../models/tourModel');
 const catchAsynErr = require('./../utils/catchAsyncErr');
 const AppError = require('./../utils/appError');
-
+const factory = require('./handlerFactory');
 
 exports.get_reviews = catchAsynErr(async(req, res, next) => {
     let filter = {};
@@ -35,3 +35,7 @@ exports.create_review = catchAsynErr(async(req, res, next) => {
     });
 
 });
+
+exports.update_review = factory.updateOne(Review);
+
+exports.delete_review = factory.deleteOne(Review);

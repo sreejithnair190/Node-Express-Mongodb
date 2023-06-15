@@ -1,7 +1,8 @@
 const User = require('./../models/userModel');
 const catchAsyncErr = require('./../utils/catchAsyncErr');
 const AppError = require('./../utils/appError');
-const { options } = require('../routes/userRoutes');
+const factory = require('./handlerFactory');
+
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {}
@@ -53,3 +54,7 @@ exports.deactivate_account = catchAsyncErr( async (req, res, next) => {
     }
   })
 });
+
+exports.update_user = factory.updateOne(User);
+
+exports.delete_user = factory.deleteOne(User);
