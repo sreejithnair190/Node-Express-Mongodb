@@ -14,18 +14,10 @@ const filterObj = (obj, ...allowedFields) => {
   return newObj;
 }
 
-
-exports.get_users = catchAsyncErr(async (req, res, next) => {
-  const users = await User.find();
-  
-  res.status(200).json({
-    status: 'success',
-    results: users.length,
-    data: {
-      users,
-    },
-  });
-})
+exports.get_account = (req, res, next) => {
+  req.params.id = req.user.id;
+  next();
+}
 
 exports.update_account = catchAsyncErr(async (req, res, next) => {
   if (req.body.password || req.body.confirm_password) {
@@ -55,6 +47,7 @@ exports.deactivate_account = catchAsyncErr( async (req, res, next) => {
   })
 });
 
+exports.get_users = factory.getAll(User);
+exports.get_user = factory.getOne(User);
 exports.update_user = factory.updateOne(User);
-
 exports.delete_user = factory.deleteOne(User);

@@ -11,52 +11,10 @@ exports.aliasTopTours = (req, res, next) => {
   next();
 };
 
-exports.get_tours = catchAsyncErr(async (req, res, next) => {
-  const features = new ApiFeatures(Tour.find(), req.query);
-  features.filter().sort().limit().paginate();
-  const tours = await features.query;
-
-  res.status(200).json({
-    status: 'success',
-    results: tours.length,
-    data: {
-      tours,
-    },
-  });
-});
-
-exports.get_tour = catchAsyncErr(async (req, res, next) => {
-  const id = req.params.id;
-  const tour = await Tour.findById(id).populate('reviews')
-
-
-  if (!tour) {
-    return next(new AppError('Tour Not Found', 404));
-  }
-
-  res.status(200).json({
-    status: 'success',
-    requestedTime: req.requestedTime,
-    data: {
-      tour,
-    },
-  });
-});
-
-exports.create_tour = catchAsyncErr(async (req, res, next) => {
-  const newTour = await Tour.create(req.body);
-
-  res.status(201).json({
-    status: 'success',
-    data: {
-      tour: newTour,
-    },
-  });
-});
-
-
+exports.get_tours = factory.getAll(Tour);
+exports.get_tour = factory.getOne(Tour, { path: 'reviews' });
+exports.create_tour = factory.updateOne(Tour);
 exports.update_tour = factory.updateOne(Tour);
-
 exports.delete_tour = factory.deleteOne(Tour);
 
 exports.get_tour_stats = catchAsyncErr(async (req, res, next) => {
