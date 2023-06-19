@@ -5,9 +5,15 @@ const reviewRouter = require('./../routes/reviewRoutes');
 
 const router = express.Router();
 
-const restrictUserMiddleware = authController.restrict_user_to(
+const protect = authController.protect;
+const allowOnlyAdminAndLeadGuide = authController.restrict_user_to(
   'admin',
   'lead-user'
+);
+const allowOnlyAdminAndGuides = authController.restrict_user_to(
+  'admin',
+  'lead-user',
+  'guide'
 );
 
 router.use('/:tour_id/reviews', reviewRouter);
@@ -18,19 +24,17 @@ router
 
 router.route('/tour-stats').get(tourController.get_tour_stats);
 
-router.route('/monthly-plan/:year').get(tourController.get_monthly_plan);
+router.route('/monthly-plan/:year').get(protect, allowOnlyAdminAndGuides, tourController.get_monthly_plan);
 
 router
   .route('/')
-  .all(authController.protect)
   .get(tourController.get_tours)
-  .post(tourController.create_tour);
+  .post(protect, allowOnlyAdminAndLeadGuide, tourController.create_tour);
 
 router
   .route('/:id')
-  .all(authController.protect)
   .get(tourController.get_tour)
-  .patch(restrictUserMiddleware, tourController.update_tour)
-  .delete(restrictUserMiddleware, tourController.delete_tour);
+  .patch(protect, allowOnlyAdminAndLeadGuide, tourController.update_tour)
+  .delete(protect, allowOnlyAdminAndLeadGuide, tourController.delete_tour);
 
 module.exports = router;

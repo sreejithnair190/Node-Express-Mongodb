@@ -13,7 +13,7 @@ exports.aliasTopTours = (req, res, next) => {
 
 exports.get_tours = factory.getAll(Tour);
 exports.get_tour = factory.getOne(Tour, { path: 'reviews' });
-exports.create_tour = factory.updateOne(Tour);
+exports.create_tour = factory.createOne(Tour);
 exports.update_tour = factory.updateOne(Tour);
 exports.delete_tour = factory.deleteOne(Tour);
 
