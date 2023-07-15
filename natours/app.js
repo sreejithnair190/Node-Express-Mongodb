@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
@@ -14,7 +15,14 @@ const errorHandler = require('./controllers/errorController');
 
 const app = express();
 
+//Setting up views
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
+
 // Global Middlewares
+
+// Serving Static File
+app.use(express.static(path.join( __dirname, 'public')));
 
 // Set Security HTTP Headers
 app.use(helmet());
@@ -53,10 +61,8 @@ app.use(
   })
 );
 
-// Serving Static File
-app.use(express.static(`${__dirname}/public/`));
-
 // Routes
+app.get( '/', (req, res, next) => res.status(200).render('base',{tour: 'The Forest Hiker', user:'Sreejith'}));
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
