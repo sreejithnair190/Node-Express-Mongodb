@@ -26,6 +26,9 @@ router.route('/tour-stats').get(tourController.get_tour_stats);
 
 router.route('/monthly-plan/:year').get(protect, allowOnlyAdminAndGuides, tourController.get_monthly_plan);
 
+router.route('/tours-within/:distance/:latlng/:unit').get(tourController.get_tours_withinDistance);
+router.route('/distances/:latlng').get(tourController.get_tours_distances);
+
 router
   .route('/')
   .get(tourController.get_tours)
