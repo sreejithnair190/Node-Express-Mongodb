@@ -10,6 +10,7 @@ const xss = require('xss-clean');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
+const viewRouter = require('./routes/viewRoutes');
 const AppError = require('./utils/appError');
 const errorHandler = require('./controllers/errorController');
 
@@ -62,7 +63,7 @@ app.use(
 );
 
 // Routes
-app.get( '/', (req, res, next) => res.status(200).render('base',{tour: 'The Forest Hiker', user:'Sreejith'}));
+app.use('/', viewRouter);
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
